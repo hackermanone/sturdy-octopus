@@ -1,0 +1,22 @@
+{
+  "name": "sturdy-octopus",
+  "version": "1.0.0",
+  "description": "Shopping list desktop application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackermanone/sturdy-octopus.git"
+  },
+  "author": "Ricky Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hackermanone/sturdy-octopus/issues"
+  },
+  "homepage": "https://github.com/hackermanone/sturdy-octopus#readme",
+  "dependencies": {
+    "electron": "^4.1.0"
+  }
+}

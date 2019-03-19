@@ -50,7 +50,6 @@ createAddWindow = () => {
 
 // catch the add item
 ipcMain.on('item:add', (e, item) => {
-    console.log(item);
     mainWindow.webContents.send('item:add', item);
     addWindow.close();
 })

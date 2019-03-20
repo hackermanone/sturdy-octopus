@@ -4,11 +4,21 @@
   "description": "System information desktop app",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "author": "Ricky Chen",
   "license": "ISC",
   "dependencies": {
-    "electron": "^4.1.0"
+  },
+  "devDependencies": {
+    "electron": "^4.1.0",
+    "electron-builder": "^20.39.0"
+  },
+  "build": {
+    "appId": "com.electron.system-info",
+    "win": {
+      "target": "nsis"
+    }
   }
 }

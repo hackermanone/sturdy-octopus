@@ -1,0 +1,14 @@
+{
+  "name": "sturdy-octopus-1",
+  "version": "1.0.0",
+  "description": "System information desktop app",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Ricky Chen",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^4.1.0"
+  }
+}

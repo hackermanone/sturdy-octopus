@@ -1,41 +1,51 @@
-const remote = require('electron').remote;
+const electron = require('electron');
+const remote = electron.remote;
 const { app } = remote; 
+const { ipcRenderer } = electron;
 
 const path = require('path');
 const fs = require('fs');
 
-let form = document.querySelector("form");
+let form = document.querySelector('form');
+
 form.addEventListener('submit', function(e) {
     e.preventDefault();
-    // console.log(e);
+    let message = document.getElementById('message');
+    let inputVal = e.target.elements[0].value;
+    // find the path we'll create the folder in 
     let desktopPath = app.getPath('desktop');
-    let portfolioPath = path.join(desktopPath, 'test', 'portfolio');
+    let portfolioPath = path.join(desktopPath, process.env.PROJECT_NAME, 'portfolio', inputVal);
 
     // create folder if it doesn't exist already
     if (!fs.existsSync(portfolioPath)) {
         createDirectory(portfolioPath);
+        message.innerHTML=`Success! Portfolio created for ${inputVal}`;
+    } else {
+        // portfolio already exists!
+        message.innerHTML="That Portfolio name is already being used. Choose another or delete it";
     }
+    // reset form
+    e.target.reset();
 
+    emitSubmit();
 })
 
 /**
+ * Recursively create folder 
  * @param {string} filepath 
  */
 function createDirectory(filepath) {
-    let directoryName = path.dirname(filepath);
-    // base case
+    // if file already exists
     if (fs.existsSync(filepath)) {
         return true;
     }
 
+    let directoryName = path.dirname(filepath);
+    // recurse on parent folder
     createDirectory(directoryName);
     fs.mkdirSync(filepath);
 }
 
-    // Can only be used in node > 10.12 -- Current version is 10.11
-    // if (!(fs.existsSync(portfolioPath))) {
-    //     // create the directory
-    //     fs.mkdir(portfolioPath, { recursive: true }, (err) => {
-    //         if (err) throw err;
-    //     })
-    // }
+function emitSubmit() {
+    ipcRenderer.send("form:submit", "Hello");
+}

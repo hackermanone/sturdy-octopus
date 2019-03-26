@@ -1,0 +1,41 @@
+body {
+    background-color: yellow;
+}
+
+h1,
+.portfolio-block,
+.portfolio-block-options
+{
+    text-align: center;
+}
+
+.portfolio-block {
+    user-select: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px;
+    border: solid 1px black;
+    width: 75%;
+    margin: 1px 2.5%;
+}
+
+.portfolio-block-options {
+    user-select: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 5px;
+    border: solid 1px black;
+    width: 12.5%;
+    margin: 1px;
+}
+
+.portfolio-block:hover,
+.portfolio-block-options:hover {
+    background-color: aliceblue;
+    cursor: crosshair;
+}
+
+.portfolio-block:active,
+.portfolio-block-options:active {
+    box-shadow: 1px 1px black;
+}

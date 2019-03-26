@@ -39,3 +39,12 @@ h1,
 .portfolio-block-options:active {
     box-shadow: 1px 1px black;
 }
+
+@media only screen and ( max-width: 478px ) {
+    .portfolio-block-options,
+    .portfolio-block {
+        display: block;
+        width: 50%;
+        margin: 0 auto;
+    }
+}

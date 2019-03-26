@@ -57,8 +57,6 @@ const winMenuTemplate = [
     }
 ]
 
-ipcMain.on("form:submit", (e, item) => {
-    console.log(e);
-    console.log(item);
+ipcMain.on("refresh", (e, item) => {
     win.reload();
 })

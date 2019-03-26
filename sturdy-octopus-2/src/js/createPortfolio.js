@@ -27,7 +27,7 @@ form.addEventListener('submit', function(e) {
     // reset form
     e.target.reset();
 
-    emitSubmit();
+    emitRefresh();
 })
 
 /**
@@ -46,6 +46,6 @@ function createDirectory(filepath) {
     fs.mkdirSync(filepath);
 }
 
-function emitSubmit() {
-    ipcRenderer.send("form:submit", "Hello");
+function emitRefresh() {
+    ipcRenderer.send("refresh", "Hello");
 }

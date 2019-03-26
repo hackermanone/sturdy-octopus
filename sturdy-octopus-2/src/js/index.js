@@ -18,8 +18,11 @@ fs.readdir(portfoliosPath, (err, files) => {
             text = document.createTextNode(file),
             br = document.createElement('br'),
             optionsDiv = document.createElement('div'),
-            optionsText = document.createTextNode('Delete');
+            optionsText = document.createTextNode('Delete'),
+            optionsAttr = document.createAttribute("for");
 
+        optionsAttr.value = file;
+        optionsDiv.setAttributeNode(optionsAttr);
         optionsDiv.appendChild(optionsText);
         optionsDiv.classList.add('portfolio-block-options');
         portfolioDiv.appendChild(text);
@@ -35,6 +38,8 @@ fs.readdir(portfoliosPath, (err, files) => {
     })
 })
 
+
+const { deletePortfolio } = require("./fileHelper");
 /**
  * event listener
  */
@@ -43,7 +48,7 @@ function handlePortfolioClick() {
     console.log('portfolio')
 }
 
-function handleDeleteClick() {
+function handleDeleteClick(e) {
     // delete portfolio entry in folder and refresh window
-    console.log('delete')
+    deletePortfolio(e);
 }

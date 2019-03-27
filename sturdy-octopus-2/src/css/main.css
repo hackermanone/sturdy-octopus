@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: yellow;
 }
@@ -10,6 +15,7 @@ h1,
 }
 
 .portfolio-block {
+    word-break: break-all;
     user-select: none;
     display: inline-block;
     font-size: 16px;
@@ -47,4 +53,25 @@ h1,
         width: 50%;
         margin: 0 auto;
     }
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+ul {
+    list-style: none;
+}
+
+ul li { 
+    padding: 5px;
+    border: 1px solid red;
+}
+
+ul li:hover {
+    background-color: aliceblue;
+    cursor: crosshair;
+    user-select: none;
 }

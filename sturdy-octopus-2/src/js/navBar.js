@@ -19,13 +19,15 @@ li.appendChild(text);
 ul.appendChild(li);
 li.addEventListener('click', appHelper.addPortfolio);
 
+
+nav.appendChild(ul);
+
 // exit
 li = document.createElement("li");
 text = document.createTextNode("Exit");
+li.classList.add("ml-auto")
 li.appendChild(text);
-ul.appendChild(li);
 li.addEventListener('click', appHelper.close)
 
-
-nav.appendChild(ul);
+nav.appendChild(li);
 

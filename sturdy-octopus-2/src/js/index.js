@@ -1,10 +1,11 @@
 /**
  * Render all portfolios
  */
-const remote = require('electron').remote;
+const { remote, ipcRenderer } = require('electron');
 const { app } = remote; 
 const fs = require('fs');
 const path = require('path');
+const { deletePortfolio } = require("./fileHelper");
 
 let desktopPath = app.getPath('desktop');
 let portfoliosPath = path.join(desktopPath, process.env.PROJECT_NAME, 'portfolio');
@@ -38,14 +39,12 @@ fs.readdir(portfoliosPath, (err, files) => {
     })
 })
 
-
-const { deletePortfolio } = require("./fileHelper");
 /**
  * event listener
  */
 function handlePortfolioClick() {
     // open up new window, with portfolio details
-    console.log('portfolio')
+    ipcRenderer.send("showPortfolioWindow");
 }
 
 function handleDeleteClick(e) {

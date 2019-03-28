@@ -13,9 +13,10 @@ let portfoliosPath = path.join(desktopPath, process.env.PROJECT_NAME, 'portfolio
 // read dir and display
 fs.readdir(portfoliosPath, (err, files) => {
     if (err) throw err;
+    let root = document.getElementById('root'),
+        div = document.createElement('div');
     files.forEach(file => {
-        let root = document.getElementById('root'),
-            portfolioDiv = document.createElement('div'),
+        let portfolioDiv = document.createElement('div'),
             text = document.createTextNode(file),
             br = document.createElement('br'),
             optionsDiv = document.createElement('div'),
@@ -33,10 +34,12 @@ fs.readdir(portfoliosPath, (err, files) => {
         portfolioDiv.addEventListener('click', handlePortfolioClick);
         optionsDiv.addEventListener('click', handleDeleteClick);
 
-        root.appendChild(portfolioDiv);
-        root.appendChild(optionsDiv);
-        root.appendChild(br);
+        div.appendChild(portfolioDiv);
+        div.appendChild(optionsDiv);
+        div.appendChild(br);
     })
+    div.id = "wrapper";
+    root.appendChild(div);
 })
 
 /**

@@ -4,12 +4,15 @@
   "description": "Rando",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "dist": "electron-builder"
   },
   "author": "Ricky Chen",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^7.0.0",
+    "dotenv": "^7.0.0"
+  },
+  "devDependencies": {
     "electron": "^4.1.1",
     "electron-builder": "^20.39.0"
   }

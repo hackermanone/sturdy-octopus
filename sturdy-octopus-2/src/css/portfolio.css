@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.portfolio-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    -webkit-app-region: drag;
+    z-index: -1;
+}
+
+textarea {
+    display: block;
+    margin: 15px auto;
+    -webkit-app-region: none;
+    font-size: 2.5rem;
+    outline: none;
+    background: transparent;
+    resize: none;
+    width: 75%;
+    font-weight: 700;
+    border: none;
+}

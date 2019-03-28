@@ -8,9 +8,10 @@ const appHelper = require('./appHelper')
 let nav = document.querySelector('nav');
 
 // build navigation
-let ul, li, text;
+let ul, li, text, div;
 ul = document.createElement("ul");
 ul.classList.add("container");
+
 
 // add profile
 li = document.createElement("li");
@@ -24,10 +25,10 @@ nav.appendChild(ul);
 
 // exit
 li = document.createElement("li");
-text = document.createTextNode("Exit");
+text = document.createTextNode("\u2716");
 li.classList.add("ml-auto")
+li.classList.add("hover-red")
 li.appendChild(text);
 li.addEventListener('click', appHelper.close)
 
 nav.appendChild(li);
-

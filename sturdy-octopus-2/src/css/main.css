@@ -1,12 +1,13 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
     min-height: 100vh;
-    background-image: linear-gradient(white 0%, blue 100%);
-
+    background-image: linear-gradient(white 0%, rgb(96, 96, 235) 50%, white 100%);
+    position: relative;
 }
 
 h1,
@@ -48,14 +49,6 @@ h1,
     box-shadow: 1px 1px black;
 }
 
-@media only screen and ( max-width: 478px ) {
-    .portfolio-block-options,
-    .portfolio-block {
-        display: block;
-        width: 50%;
-        margin: 0 auto;
-    }
-}
 
 .container {
     -webkit-app-region: drag;
@@ -76,7 +69,7 @@ ul li,
 li { 
     display: block;
     -webkit-app-region: none;
-    padding: 5px;
+    padding: 10px;
     /* border: 1px solid red; */
     color: rgb(189, 184, 184);
 }
@@ -92,6 +85,26 @@ li:hover {
     margin-left: auto;
 }
 
-.margin-left-auto {
-    margin-left: auto;
+.hover-red:hover {
+    background-color: rgb(201, 16, 16);
+}
+
+::-webkit-scrollbar,
+::-webkit-scrollbar-corner  {
+    background-color: rgb(51, 46, 46);
+}
+
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(80, 76, 76);
+
+}
+
+@media only screen and ( max-width: 478px ) {
+    .portfolio-block-options,
+    .portfolio-block {
+        display: block;
+        width: 50%;
+        margin: 0 auto;
+    }
 }

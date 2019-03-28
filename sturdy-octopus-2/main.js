@@ -5,8 +5,8 @@ const url = require('url');
 const path = require('path');
 
 let win ; // main window
-let portfolioWin; // create portfolio window
-let profileWin;
+let createPortfolioWin; // create portfolio window
+let portfolioWin;
 
 app.on('ready', createWindow);
 
@@ -28,14 +28,19 @@ function createWindow() {
 }
 
 function createPortfolioWindow() {
-    portfolioWin = new BrowserWindow({parent: win, height: 600, width:700, frame: false});
-    portfolioWin.loadFile('src/html/createPortfolio.html');
+    createPortfolioWin = new BrowserWindow({parent: win, height: 600, width:700, frame: false});
+    createPortfolioWin.loadURL(url.format({
+        pathname: path.join(__dirname, 'src', 'html', 'createPortfolio.html'),
+        protocol: "file:",
+        slashes: true
+
+    }));
 }
 
 function showPortfolioWindow() {
-    profileWin = new BrowserWindow({parent: win, height: 600, width: 800, frame: false});
-    profileWin.loadURL(url.format({
-        pathname: path.join(__dirname, 'src', 'html', 'createPortfolio.html'),
+    portfolioWin = new BrowserWindow({parent: win, height: 600, width: 800, frame: false});
+    portfolioWin.loadURL(url.format({
+        pathname: path.join(__dirname, 'src', 'html', 'portfolio.html'),
         protocol: "file:",
         slashes: true
     }))
@@ -49,12 +54,15 @@ ipcMain.on("refresh", (e, item) => {
 ipcMain.on("createPortfolioWindow", (e, item) => {
     createPortfolioWindow();
     if (process.env.NODE_ENV !== 'production') {
-        portfolioWin.toggleDevTools();
+        createPortfolioWin.toggleDevTools();
     }
 });
 
 ipcMain.on("showPortfolioWindow", (e, item) => {
     showPortfolioWindow();
+    if (process.env.NODE_ENV !== 'production') {
+        portfolioWin.toggleDevTools();
+    }
 })
 
 // const winMenuTemplate = [

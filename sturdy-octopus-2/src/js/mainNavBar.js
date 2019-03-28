@@ -8,7 +8,7 @@ const appHelper = require('./appHelper')
 let nav = document.querySelector('nav');
 
 // build navigation
-let ul, li, text, div;
+let ul, li, text;
 ul = document.createElement("ul");
 ul.classList.add("container");
 

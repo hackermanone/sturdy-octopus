@@ -16,11 +16,26 @@ textarea {
     display: block;
     margin: 15px auto;
     -webkit-app-region: none;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     outline: none;
     background: transparent;
     resize: none;
     width: 75%;
     font-weight: 700;
     border: none;
+    word-break: break-all;
+}
+
+.invisible {
+    display: none;
+}
+
+.mx-auto {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.font-size--30 {
+    font-size: 30px
 }

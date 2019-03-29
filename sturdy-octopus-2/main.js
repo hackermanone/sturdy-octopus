@@ -63,6 +63,10 @@ ipcMain.on("showPortfolioWindow", (e, item) => {
     if (process.env.NODE_ENV !== 'production') {
         portfolioWin.toggleDevTools();
     }
+
+    portfolioWin.webContents.once("dom-ready", () => {
+        portfolioWin.webContents.send("render:notes", item);
+    });
 })
 
 // const winMenuTemplate = [

@@ -2,17 +2,27 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-family:  "Brush Script MT", "cursive", "Brush Script Std", "Roundhand";
+    font-size: 20px;
+    position: relative;
+}
+
+.bg {
+    background-image: url('../assets/paper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
 }
 
 .portfolio-container {
     position: absolute;
-    width: 100vw;
-    height: 100vh;
     -webkit-app-region: drag;
     z-index: -1;
 }
 
-textarea {
+textarea, 
+input[type="text"] {
     display: block;
     margin: 15px auto;
     -webkit-app-region: none;
@@ -24,6 +34,11 @@ textarea {
     font-weight: 700;
     border: none;
     word-break: break-all;
+}
+
+div {
+    -webkit-app-region: none;
+    display: block;
 }
 
 .invisible {
@@ -38,4 +53,17 @@ textarea {
 
 .font-size--30 {
     font-size: 30px
+}
+
+.scroll {
+    padding: 20px;
+    margin: 15px 5%;
+    overflow-y: scroll;
+    border: rgb(180, 75, 75) 1px solid;
+    max-height: 50%;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
 }

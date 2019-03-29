@@ -17,6 +17,7 @@ fs.readdir(portfoliosPath, (err, files) => {
         div = document.createElement('div');
     files.forEach(file => {
         let portfolioDiv = document.createElement('div'),
+            portfolioAttr = document.createAttribute("for"),
             text = document.createTextNode(file),
             br = document.createElement('br'),
             optionsDiv = document.createElement('div'),
@@ -27,6 +28,8 @@ fs.readdir(portfoliosPath, (err, files) => {
         optionsDiv.setAttributeNode(optionsAttr);
         optionsDiv.appendChild(optionsText);
         optionsDiv.classList.add('portfolio-block-options');
+        portfolioAttr.value = file;
+        portfolioDiv.setAttributeNode(portfolioAttr);
         portfolioDiv.appendChild(text);
         portfolioDiv.classList.add('portfolio-block');
         
@@ -45,9 +48,9 @@ fs.readdir(portfoliosPath, (err, files) => {
 /**
  * event listener
  */
-function handlePortfolioClick() {
+function handlePortfolioClick(e) {
     // open up new window, with portfolio details
-    ipcRenderer.send("showPortfolioWindow");
+    ipcRenderer.send("showPortfolioWindow", e.target.getAttribute("for"));
 }
 
 function handleDeleteClick(e) {

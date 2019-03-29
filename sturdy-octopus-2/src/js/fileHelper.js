@@ -16,6 +16,13 @@ module.exports.deletePortfolio = (event) => {
     emitRefresh();
 }    
 
+module.exports.addNote = function (directory, title, body) {
+    let filePath = path.join(directory, title);
+    fs.writeFile(filePath, body, (err) => {
+        if (err) throw err;
+    })
+}
+
 function deleteFolder(directory) {
     fs.readdirSync(directory).forEach((file) => {
         let curr = path.join(directory, file);

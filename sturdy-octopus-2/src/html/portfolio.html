@@ -7,14 +7,17 @@
     <title></title>
 </head>
 <body>
-    <div>
-        <img class="portfolio-container" src="../assets/paper.jpg" alt="paper" />
-        <form>
-            <textarea rows="4" cols="30" name="note" id="note" placeholder="Insert text Here ..."></textarea>
+    <div id="root" class="bg">
+        <form id="form">
+            <input type="text" name="title" id="title" placeholder="Insert title "/>
+            <textarea rows="3" cols="30" name="note" id="note" placeholder="Insert text here ... Enter to submit"></textarea>
             <button class="invisible" type="submit">Submit</button>
         </form>
         <div class="mx-auto font-size--30">Notes</div>
-        <div id="notes"></div>
+        <div id="notes" class="scroll"></div>
     </div>
 </body>
+<script>
+    require('../js/portfolio.js');
+</script>
 </html>

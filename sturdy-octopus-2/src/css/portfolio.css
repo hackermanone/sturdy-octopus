@@ -8,6 +8,7 @@
 }
 
 .bg {
+    -webkit-app-region: drag;
     background-image: url('../assets/paper.jpg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -17,7 +18,6 @@
 
 .portfolio-container {
     position: absolute;
-    -webkit-app-region: drag;
     z-index: -1;
 }
 
@@ -38,7 +38,6 @@ input[type="text"] {
 
 div {
     -webkit-app-region: none;
-    display: block;
 }
 
 .invisible {
@@ -59,11 +58,22 @@ div {
     padding: 20px;
     margin: 15px 5%;
     overflow-y: scroll;
-    border: rgb(180, 75, 75) 1px solid;
     max-height: 50%;
 }
 
 ::-webkit-scrollbar {
     width: 0px;
     background: transparent;
+}
+
+.hider {
+    margin-top: 2px;
+    background-color: aliceblue;
+    cursor: pointer;
+    border: 1px black solid;
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
 }

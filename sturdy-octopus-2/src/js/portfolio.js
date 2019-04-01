@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const { addNote } = require("./fileHelper");
 
-let user;
+let user = remote.getGlobal('currUser');
 let desktopPath = app.getPath('desktop');
 let portfoliosPath = path.join(desktopPath, process.env.PROJECT_NAME, 'portfolio');
 let userPortfolio;
@@ -14,6 +14,12 @@ let notes = document.querySelector("#notes");
 let form = document.querySelector("#form");
 
 let fileTitles = [];
+
+if (user) {
+    console.log(user);
+    renderNotes(user);
+    form.addEventListener('keypress', handleSubmitNote);
+}
 
 function renderNotes(portfolioName) {
     userPortfolio = path.join(portfoliosPath, portfolioName);
@@ -29,18 +35,15 @@ function renderNotes(portfolioName) {
     })
 }
 
-ipcRenderer.once("render:notes", (e, name) => {
-    user = name;
-    renderNotes(name);
-    form.addEventListener('keypress', handleSubmitNote);
-})
-
 function handleSubmitNote(e) {
+    // keycode 13 === enter key
     if (e.keyCode == 13) {
         e.preventDefault();
-        let formData = form.elements;
+        //array with first element as form title, and second element as form body
+        let formData = form.elements; 
         addNote(userPortfolio, formData[0].value, formData[1].value);
         form.reset();
+        formData[0].focus();
         refreshNotes();
     }
 }
@@ -68,10 +71,15 @@ function refreshNotes() {
  * @param {string} noteData 
  */
 function renderNote(name, noteData) {
-    let div, note, wrapper, divAttr;
+    let div, note, wrapper, divAttr, span;
     wrapper = document.createElement("div");
     wrapper.classList.add("hider");
-    wrapper.innerHTML = name;
+    // title of wrapper
+    span = document.createElement("span");
+    span.classList.add("bold");
+    span.innerHTML = name;
+    wrapper.appendChild(span);
+    // wrapper hidden body
     divAttr = document.createAttribute("name");
     fileTitles.push(name);
     divAttr.value = name;
@@ -82,4 +90,16 @@ function renderNote(name, noteData) {
     div.appendChild(note);
     wrapper.appendChild(div);
     notes.appendChild(wrapper);
+
+    wrapper.addEventListener('click', handleClick);
+}
+
+function handleClick(e) {
+    let div;
+    if (e.target.tagName.toLowerCase() === 'span') {
+        div = e.target.parentNode.children[1];
+    } else {
+        div = e.target.children[1];
+    }
+    div.classList.contains("invisible") ? div.classList.remove("invisible") : div.classList.add("invisible");
 }

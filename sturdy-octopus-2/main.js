@@ -64,9 +64,10 @@ ipcMain.on("showPortfolioWindow", (e, item) => {
         portfolioWin.toggleDevTools();
     }
 
-    portfolioWin.webContents.once("dom-ready", () => {
-        portfolioWin.webContents.send("render:notes", item);
-    });
+    global.currUser = item;
+    // portfolioWin.webContents.once("dom-ready", () => {
+    //     portfolioWin.webContents.send("render:notes", item);
+    // });
 })
 
 // const winMenuTemplate = [

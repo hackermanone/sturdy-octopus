@@ -74,6 +74,11 @@ div {
     text-align: center;
 }
 
+.hider-content {
+    background-color: grey;
+    cursor: default;
+}
+
 .bold {
     font-weight: bold;
 }

@@ -1,3 +1,3 @@
 # sturdy-octopus
 
-Electron applications
+Series of sturdy applications

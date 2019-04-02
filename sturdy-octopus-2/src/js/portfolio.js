@@ -88,18 +88,29 @@ function renderNote(name, noteData) {
     div.setAttributeNode(divAttr);
     note = document.createTextNode(noteData);
     div.appendChild(note);
+    div.classList.add("hider-content")
     wrapper.appendChild(div);
     notes.appendChild(wrapper);
 
     wrapper.addEventListener('click', handleClick);
 }
 
+/**
+ * expands div if user clicks on the wrapper
+ * @param {Event} e 
+ */
 function handleClick(e) {
     let div;
+    console.log(e.target);
+    // span
     if (e.target.tagName.toLowerCase() === 'span') {
         div = e.target.parentNode.children[1];
-    } else {
+    //wrapper div
+    } else if (e.target.classList.contains('hider')) {
         div = e.target.children[1];
     }
-    div.classList.contains("invisible") ? div.classList.remove("invisible") : div.classList.add("invisible");
+
+    if (div) {
+        div.classList.contains("invisible") ? div.classList.remove("invisible") : div.classList.add("invisible");
+    }
 }

@@ -1,6 +1,6 @@
 require('dotenv').config();
 const electron = require('electron');
-const { app, BrowserWindow, Menu, ipcMain } = electron;
+const { app, BrowserWindow, Menu, ipcMain, globalShortcut } = electron;
 const url = require('url');
 const path = require('path');
 
@@ -13,13 +13,15 @@ app.on('ready', createWindow);
 function createWindow() {
     win = new BrowserWindow({height:600, width:800, frame: false, webPreferences: { nodeIntegration: true }});
     win.loadFile('src/html/index.html');
+    
+    // global shortcuts
+    const reg = globalShortcut.register('CommandOrControl+G', () => {
+        createPortfolioWindow();
+    })
 
     if (process.env.NODE_ENV !== 'production') {
         win.toggleDevTools();
     }
-
-    // const winMenu = Menu.buildFromTemplate(winMenuTemplate);
-    // Menu.setApplicationMenu(winMenu);
 
     // when window is closed, quit the application
     win.on('closed', () => {
@@ -28,7 +30,7 @@ function createWindow() {
 }
 
 function createPortfolioWindow() {
-    createPortfolioWin = new BrowserWindow({parent: win, height: 600, width:700, frame: false});
+    createPortfolioWin = new BrowserWindow({parent: win, height: 300, width:400, frame: false});
     createPortfolioWin.loadURL(url.format({
         pathname: path.join(__dirname, 'src', 'html', 'createPortfolio.html'),
         protocol: "file:",

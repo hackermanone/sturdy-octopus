@@ -26,7 +26,7 @@ form.addEventListener('submit', function(e) {
     }
     // reset form
     e.target.reset();
-
+    e.target.focus();
     emitRefresh();
 })
 

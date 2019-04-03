@@ -49,6 +49,12 @@ h1,
     box-shadow: 1px 1px black;
 }
 
+#wrapper {
+    font-family: monospace;
+    text-align: center;
+    color: grey;
+    font-size: 18px;
+}
 
 .container {
     -webkit-app-region: drag;

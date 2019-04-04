@@ -15,3 +15,43 @@ h4 {
 form {
     text-align: center;
 }
+
+nav {
+    background-color: rgb(51, 46, 46);
+}
+
+ul, 
+li {
+    list-style: none;
+}
+
+ul li,
+li {
+    display: block;
+    -webkit-app-region: none;
+    padding: 10px;
+    /* border: 1px solid red; */
+    color: rgb(189, 184, 184);
+}
+
+ul li:hover,
+li:hover {
+    background-color: rgb(116, 116, 116);
+    cursor: crosshair;
+    user-select: none;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.hover-red:hover {
+    background-color: rgb(201, 16, 16);
+}
+
+.container {
+    -webkit-app-region: drag;
+    display: flex;
+    flex-direction: row;
+}
+

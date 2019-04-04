@@ -5,6 +5,7 @@ const { ipcRenderer } = electron;
 const path = require('path');
 const fs = require('fs');
 const { addNote } = require("./fileHelper");
+const { closeWindow } = require("./appHelper");
 
 let user = remote.getGlobal('currUser');
 let desktopPath = app.getPath('desktop');
@@ -14,12 +15,18 @@ let notes = document.querySelector("#notes");
 let form = document.querySelector("#form");
 
 let fileTitles = [];
+let button = document.getElementById("exit");
 
 if (user) {
     console.log(user);
     renderNotes(user);
     form.addEventListener('keypress', handleSubmitNote);
 }
+
+button.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeWindow();
+})
 
 function renderNotes(portfolioName) {
     userPortfolio = path.join(portfoliosPath, portfolioName);

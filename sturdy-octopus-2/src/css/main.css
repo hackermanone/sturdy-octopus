@@ -6,7 +6,8 @@
 
 body {
     min-height: 100vh;
-    background-image: linear-gradient(white 0%, rgb(96, 96, 235) 50%, white 100%);
+    /* background-image: linear-gradient(white 0%, rgb(96, 96, 235) 50%, white 100%); */
+    background-color: rgb(233, 218, 218);
     position: relative;
 }
 
@@ -52,7 +53,7 @@ h1,
 #wrapper {
     font-family: monospace;
     text-align: center;
-    color: grey;
+    color: rgb(32, 26, 26);
     font-size: 18px;
 }
 

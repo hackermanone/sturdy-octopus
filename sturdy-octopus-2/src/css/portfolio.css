@@ -68,18 +68,26 @@ div {
 
 .hider {
     margin-top: 2px;
-    background-color: aliceblue;
+    background-color: rgb(145, 98, 55);
     cursor: pointer;
     border: 1px black solid;
     text-align: center;
 }
 
 .hider-content {
-    background-color: grey;
+    background-color: rgb(218, 178, 115);
     cursor: default;
 }
 
 .bold {
     font-weight: bold;
     user-select: none;
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    -webkit-app-region: none;
+    user-select: none;
+    background-color: rgb(218, 178, 115);
 }

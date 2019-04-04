@@ -8,6 +8,9 @@ exports.close = () => {
     app.quit()
 }
 
+exports.closeWindow = () => {
+    electron.remote.getCurrentWindow().close();
+}
 
 exports.addPortfolio = () => {
     ipcRenderer.send('createPortfolioWindow');

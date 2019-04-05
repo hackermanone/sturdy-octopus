@@ -45,7 +45,7 @@ fs.readdir(portfoliosPath, (err, files) => {
     root.appendChild(div);
     
     let wrapperChild = root.getElementsByTagName('div')[0];
-    console.log(wrapperChild);
+    //     console.log(wrapperChild);
     if (wrapperChild.innerHTML === "") {
         let shortcut = process.platform == 'darwin' ? 'Command' : 'Control';
         let text = document.createTextNode(`Hmm, you don't seem to have a profile created, Create one using using the shortcut ${shortcut} + G`);

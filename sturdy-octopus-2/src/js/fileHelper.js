@@ -26,7 +26,7 @@ module.exports.addNote = function (directory, title, body) {
 function deleteFolder(directory) {
     fs.readdirSync(directory).forEach((file) => {
         let curr = path.join(directory, file);
-        console.log(file);
+        //console.log(file);
         if (fs.lstatSync(curr).isDirectory()) {
             deleteFolder(curr);
         } else {

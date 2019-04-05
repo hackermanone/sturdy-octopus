@@ -108,7 +108,6 @@ function renderNote(name, noteData) {
  */
 function handleClick(e) {
     let div;
-    console.log(e.target);
     // span
     if (e.target.tagName.toLowerCase() === 'span') {
         div = e.target.parentNode.children[1];

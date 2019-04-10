@@ -1,17 +1,16 @@
-
 import * as fun from './index';
 
 class Person {
-    @fun.hehe()
+    //@fun.hehe()
     _name: string = 'hahahahah';
-    _balance: number;
+    _balance: number = 0;
 
     constructor(name: string, balance: number) {
         this._name = name;
         this._balance = balance;
     }
 
-    @fun.WithTax(0.15)
+    //@fun.WithTax(0.15)
     get balance() {
         return this._balance;
     }
@@ -22,7 +21,17 @@ class Person {
         }
         this._balance = value;
     }
+
+    //@fun.log('logger decorator')
+    method() {
+        console.log('i am a method');
+    }
+
+    methodTwo(@fun.required name :string) {
+        console.log(name);
+    }
 }
 
 let a = new Person("Ricky", 100);
-console.log(a._name);
+//console.log(a.balance);
+a.methodTwo('hehe');

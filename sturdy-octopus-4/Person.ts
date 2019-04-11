@@ -1,5 +1,6 @@
 import * as fun from './index';
 
+//@fun.Frozen
 class Person {
     //@fun.hehe()
     _name: string = 'hahahahah';

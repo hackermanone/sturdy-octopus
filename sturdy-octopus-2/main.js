@@ -8,6 +8,8 @@ let win ; // main window
 let createPortfolioWin; // create portfolio window
 let portfolioWin;
 
+process.env.PROJECT_NAME = process.env.PROJECT_NAME || "BBQuotes"
+
 app.on('ready', createWindow);
 
 function createWindow() {

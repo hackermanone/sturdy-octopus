@@ -5,10 +5,10 @@ class App extends Component {
   render() {
     return (
       <div id="container">
-        <aside id="sidebar">Users</aside>
+        <Sidebar />
         <section id="main">
-          <section id="messages-list">Messages list</section>
-          <section id="new-message">New message</section>
+          <MessagesList />
+          <AddMessage />
         </section>
       </div>
     );

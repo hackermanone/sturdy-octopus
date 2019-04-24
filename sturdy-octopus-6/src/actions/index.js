@@ -25,6 +25,6 @@ export const messageReceived = (message, author) => ({
 }) 
 
 export const populateUsersList = users => ({
-    tyoe: types.USERS_LIST,
+    type: types.USERS_LIST,
     users
 })

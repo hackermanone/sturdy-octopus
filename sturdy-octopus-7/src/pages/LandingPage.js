@@ -20,10 +20,9 @@ class LandingPage extends React.Component {
         e.preventDefault();
         console.log(e);
         const data = new FormData(e.target);
-        
-        for (let tuple of data.entries()) {
-            console.log(tuple);
-        }
+
+        console.log(...data);
+        this.props.history.push('main')
     }
 
 }

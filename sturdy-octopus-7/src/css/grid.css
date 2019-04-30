@@ -11,7 +11,7 @@
 .table-cell {
     text-align: center;
     display: table-cell;
-    border: 1px black solid;
+    border: 0.1px black solid;
     width:10px;
     height:10px;
 }

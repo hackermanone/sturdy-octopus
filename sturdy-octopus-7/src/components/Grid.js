@@ -18,10 +18,11 @@ class Grid extends React.Component {
             rows.map((cols, colIndex) => {
                 result.push(
                 <div 
-                key={`r${rowIndex}c${colIndex}`} 
-                onDragStart={this.handleDragStart} 
-                onDragOver={this.handleDragOver} 
-                onClick={this.handleDragStart}
+                key={`r${rowIndex}c${colIndex}`}
+                id={`r${rowIndex}c${colIndex}`}
+                onClick={this.props.onDragStart}
+                onDragStart={this.props.onDragStart}
+                onDragOver={this.props.onDragOver}
                 draggable="true"
                 className="table-cell">
                 </div>
@@ -32,18 +33,6 @@ class Grid extends React.Component {
         })
 
         return result;
-    }
-
-    handleDragOver = (e) => {
-        e.preventDefault();
-        if (e.target.className === "table-cell") {
-            e.target.className = "table-cell on";
-        } 
-        console.log(e.target.className);
-    }
-
-    handleDragStart = (e) => {
-        e.target.className = "table-cell on";
     }
 }
 

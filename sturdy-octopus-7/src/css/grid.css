@@ -1,0 +1,25 @@
+.table {
+    display: table;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.table-row {
+    display: table-row;
+}
+
+.table-cell {
+    text-align: center;
+    display: table-cell;
+    border: 1px black solid;
+    width:10px;
+    height:10px;
+}
+
+.table-cell:hover {
+    background-color: green;
+}
+
+.on {
+    background-color: green;
+}

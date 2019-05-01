@@ -22,6 +22,7 @@ class MainPage extends React.Component {
 
         this.getCell = this.getCell.bind(this);
         this.updateGridCopy = this.updateGridCopy.bind(this);
+        this.setSize = this.setSize.bind(this);
     }
 
     componentDidMount() {
@@ -44,6 +45,11 @@ class MainPage extends React.Component {
                 <button onClick={this.handleStart}>Start</button>
                 <button onClick={this.handleStop}>Stop</button>
                 <button type="reset" onClick={this.handleReset}>Reset</button>
+                <form onSubmit={this.setSize}>
+                    <input name="rows" type="number" min="1" placeholder="# Rows" required/>
+                    <input name="cols" type="number" min="1" placeholder="# Cols" required/>
+                    <input type="submit" value="submit"></input>
+                </form>
             </div>
         )
     }
@@ -74,6 +80,22 @@ class MainPage extends React.Component {
 
     updateGridCopy(row, col) {
         this.gridCopy[row][col] = 1
+    }
+
+    setSize(e) {
+        e.preventDefault();
+        let data = new FormData(e.target);
+        // parse the string to base 10
+        this.rows = parseInt(data.get("rows"), 10);
+        this.cols = parseInt(data.get("cols"), 10);
+
+        this.gridCopy = Array(this.rows).fill(0).map((a)=> {
+            return Array((this.cols)).fill(0);
+        })
+
+        this.setState({
+            gridFull: this.gridCopy
+        })
     }
 
     updateState = () => {

@@ -24,7 +24,7 @@ class Grid extends React.Component {
                 onDragStart={this.props.onDragStart}
                 onDragOver={this.props.onDragOver}
                 draggable="true"
-                className="table-cell">
+                className={grid[rowIndex][colIndex] === 1 ? "table-cell on" : "table-cell"}>
                 </div>
                 );
                 return cols;

@@ -7,8 +7,8 @@ class MainPage extends React.Component {
     constructor() {
         super();
         this.speed = 100;
-        this.rows = 40;
-        this.cols = 70;
+        this.rows = 5;
+        this.cols = 4;
         this.play = null;
         this.state = {
             generation: 0,
@@ -18,15 +18,11 @@ class MainPage extends React.Component {
                 }
             )
         };
-        this.gridCopy = this.state.gridFull;
+        this.queue = [];
 
         this.getCell = this.getCell.bind(this);
-        this.updateGridCopy = this.updateGridCopy.bind(this);
+        this.pushToQueue = this.pushToQueue.bind(this);
         this.setSize = this.setSize.bind(this);
-    }
-
-    componentDidMount() {
-        setInterval(this.updateState, 300);
     }
 
     render() {
@@ -45,6 +41,7 @@ class MainPage extends React.Component {
                 <button onClick={this.handleStart}>Start</button>
                 <button onClick={this.handleStop}>Stop</button>
                 <button type="reset" onClick={this.handleReset}>Reset</button>
+                <button onClick={this.handleNext}>Next</button>
                 <form onSubmit={this.setSize}>
                     <input name="rows" type="number" min="1" placeholder="# Rows" required/>
                     <input name="cols" type="number" min="1" placeholder="# Cols" required/>
@@ -55,7 +52,10 @@ class MainPage extends React.Component {
     }
 
     handleStop = () => {
-        clearInterval(this.play);
+        if (this.play) {
+            clearInterval(this.play);
+            this.play = null;
+        }
     }
 
     handleStart = () => {
@@ -65,7 +65,39 @@ class MainPage extends React.Component {
     }
 
     start = () => {
-        console.log('jh')
+        // make sure we have the most updated grid
+        this.updateState();
+        let gridCopy = Object.assign([], this.state.gridFull)
+        // play the game!
+        gridCopy.forEach( (row, rowIndex, rowArray) => {
+            row.forEach((col, colIndex) => {
+                let adjCells = 0;
+                let isDead = this.state.gridFull[rowIndex][colIndex] === 0;
+                // look at the number of adjcent cells
+                //console.log(`Row ${rowIndex} Col ${colIndex}`)
+                if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex - 1]) {adjCells++;}
+                if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex]) {adjCells++; }
+                if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex + 1]) {adjCells++; }
+                if (this.state.gridFull[rowIndex][colIndex - 1]) {adjCells++; }
+                if (this.state.gridFull[rowIndex][colIndex + 1]) {adjCells++; }
+                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex - 1]) {adjCells++; }
+                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex]) {adjCells++; }
+                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex + 1]) {adjCells++; }
+
+                
+                // the cell dies of over population
+                if (adjCells < 2 || adjCells > 3) {
+                    gridCopy[rowIndex][colIndex] = 0;
+                } 
+                // the cell comes to life
+                else if (isDead && adjCells === 3) {
+                    gridCopy[rowIndex][colIndex] = 1;
+                }
+            })
+        });
+        console.log(this.state.gridFull)
+        // update state
+        // this.updateState();
     }
 
     getCell(element) {
@@ -78,8 +110,8 @@ class MainPage extends React.Component {
         return cellArray;
     }
 
-    updateGridCopy(row, col) {
-        this.gridCopy[row][col] = 1
+    pushToQueue(row, col, value) {
+        this.queue.push([row,col,value])
     }
 
     setSize(e) {
@@ -94,15 +126,21 @@ class MainPage extends React.Component {
         })
 
         this.setState({
-            gridFull: this.gridCopy
+            gridFull: Array.from(this.gridCopy)
         })
     }
 
     updateState = () => {
+        let gridCopy = Array.from(this.state.gridFull);
+        while (this.queue.length) {
+            let [row, col, value] = this.queue.shift();
+            if (row) {
+                gridCopy[row][col] = value;
+            }
+        }
         this.setState({
-            gridFull: this.gridCopy
+            gridFull: gridCopy
         })
-        //console.log(this.state.gridFull)
     }
 
     handleReset = () => {
@@ -111,21 +149,26 @@ class MainPage extends React.Component {
         })
 
         this.setState({
-            gridFull: this.gridCopy
+            gridFull: Array.from(this.gridCopy)
         })
+    }
+
+    handleNext = () => {
+        this.start();
     }
 
     handleDragOver = (e) => {
         e.preventDefault();
         e.target.classList = "table-cell on";
         let [row, col] = this.getCell(e.target);
-        this.updateGridCopy(row, col);
+        this.pushToQueue(row, col, 1);
     }
 
     handleDragStart = (e) => {
         e.target.classList = "table-cell on";
         let [row, col] = this.getCell(e.target);
-        this.updateGridCopy(row, col);
+        this.pushToQueue(row, col, 1);
+        console.log(this.queue)
     }
 }
 

@@ -69,35 +69,35 @@ class MainPage extends React.Component {
         this.updateState();
         let gridCopy = Object.assign([], this.state.gridFull)
         // play the game!
-        gridCopy.forEach( (row, rowIndex, rowArray) => {
+        this.state.gridFull.forEach( (row, rowIndex, rowArray) => {
             row.forEach((col, colIndex) => {
                 let adjCells = 0;
                 let isDead = this.state.gridFull[rowIndex][colIndex] === 0;
                 // look at the number of adjcent cells
-                //console.log(`Row ${rowIndex} Col ${colIndex}`)
-                if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex - 1]) {adjCells++;}
+                // console.log(`Row ${rowIndex} Col ${colIndex}`)
+                if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex - 1]) {adjCells++; }
                 if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex]) {adjCells++; }
                 if (rowIndex > 0) if (this.state.gridFull[rowIndex - 1][colIndex + 1]) {adjCells++; }
-                if (this.state.gridFull[rowIndex][colIndex - 1]) {adjCells++; }
-                if (this.state.gridFull[rowIndex][colIndex + 1]) {adjCells++; }
+                if (this.state.gridFull[rowIndex][colIndex - 1]) { adjCells++;  }
+                if (this.state.gridFull[rowIndex][colIndex + 1]) { adjCells++;  }
                 if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex - 1]) {adjCells++; }
-                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex]) {adjCells++; }
-                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex + 1]) {adjCells++; }
+                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex]) {adjCells++; } 
+                if (rowIndex < rowArray.length - 1) if (this.state.gridFull[rowIndex + 1][colIndex + 1]) {adjCells++;  }
 
-                
                 // the cell dies of over population
-                if (adjCells < 2 || adjCells > 3) {
-                    gridCopy[rowIndex][colIndex] = 0;
+                if (!isDead && (adjCells < 2 || adjCells > 3)) {
+                    this.pushToQueue(rowIndex, colIndex, 0);
                 } 
                 // the cell comes to life
                 else if (isDead && adjCells === 3) {
-                    gridCopy[rowIndex][colIndex] = 1;
+                    this.pushToQueue(rowIndex, colIndex, 1);
                 }
             })
         });
-        console.log(this.state.gridFull)
-        // update state
-        // this.updateState();
+        
+        this.setState({
+            generation: this.state.generation + 1
+        })
     }
 
     getCell(element) {
@@ -112,6 +112,7 @@ class MainPage extends React.Component {
 
     pushToQueue(row, col, value) {
         this.queue.push([row,col,value])
+        console.log(this.queue)
     }
 
     setSize(e) {
@@ -126,16 +127,24 @@ class MainPage extends React.Component {
         })
 
         this.setState({
-            gridFull: Array.from(this.gridCopy)
+            gridFull: Object.assign([], this.gridCopy)
         })
     }
 
     updateState = () => {
-        let gridCopy = Array.from(this.state.gridFull);
+        let gridCopy = Object.assign([], this.state.gridFull);
         while (this.queue.length) {
             let [row, col, value] = this.queue.shift();
             if (row) {
+                console.log(row, col, value)
                 gridCopy[row][col] = value;
+                console.log("hi", gridCopy)
+            }
+            if (value === 1) {
+                document.getElementById(`r${row}c${col}`).className = "table-cell on"
+            }
+            else if (value === 0) {
+                document.getElementById(`r${row}c${col}`).className = "table-cell"
             }
         }
         this.setState({
@@ -144,13 +153,15 @@ class MainPage extends React.Component {
     }
 
     handleReset = () => {
-        this.gridCopy.map((arr) => {
-            return arr.fill(0)
-        })
+        let freshBoard = Object.assign([], this.state.gridFull.map((arr, rowIndex) => {
+            return Array(this.cols).fill(0)
+        }))
 
         this.setState({
-            gridFull: Array.from(this.gridCopy)
+            gridFull: freshBoard,
+            generation: 0
         })
+        console.log(this.state.gridFull);
     }
 
     handleNext = () => {
@@ -168,7 +179,6 @@ class MainPage extends React.Component {
         e.target.classList = "table-cell on";
         let [row, col] = this.getCell(e.target);
         this.pushToQueue(row, col, 1);
-        console.log(this.queue)
     }
 }
 
